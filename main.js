@@ -4,13 +4,13 @@ function simular ()
     {
     const nombre = prompt("Bienvenido a nuestro simulador de préstamos, ingrese su nombre para iniciar") ?? ""
     if(nombre == "") {
-        alert("Debe ingresar un nombre válido")
-        console.log(nombre)
-        console.error("No ingresó un nombre válido")
+        alert("Debe ingresar un nombre válido.")
+        console.error("No ingresó un nombre válido.")
     }else{ 
-        alert(`Bienvenido ${nombre}. Usted puede generar hasta 3 simulaciones de préstamo. Nuestro interés actual es del 40%. En caso de querer simular menos y salir del programa, ingrese cualquier carácter que no sea numérico.`)
+        alert(`Bienvenido ${nombre}. Usted puede generar hasta 3 simulaciones de préstamo, nuestro interés actual es del 40%. En caso de querer simular menos y salir del programa, seleccione cancelar o ingrese cualquier carácter que no sea numérico.`)
         const prestamos = []
-        for (let cantidadSimulaciones = 0; cantidadSimulaciones<3; cantidadSimulaciones++) { 
+        let cantidadSimulaciones = 0
+        do { 
             let montoSolicitado = parseInt(prompt(`Ingrese el monto que desea solicitar, el mismo debe ser mayor a $ARS 1000 y menor que $ARS 5000000.`))
             if(isNaN(montoSolicitado)){
                 break
@@ -19,10 +19,9 @@ function simular ()
                 }else{
                     const cuotas = parseInt(prompt("Ingrese la cantidad de cuotas a pagar, el máximo a solicitar son 72 cuotas."))
                     if(isNaN(cuotas)){
-                        console.error("Ha ingresado un dato no válido.")
-                        break
-                    } else if (cuotas>72){
-                        alert("La cantidad de cuotas ingresadas es mayor al límite. Intente nuevamente")
+                        console.error("Ha ingresado un dato no válido. Intente nuevamente.")
+                    } else if (cuotas>72 || cuotas<1){
+                        alert("La cantidad de cuotas ingresadas está fuera de los límites. Intente nuevamente")
                     }else{
                         prestamos.push(
                             {
@@ -30,8 +29,9 @@ function simular ()
                                 cantidadCuotas: cuotas,
                                 valorCuota: calculoCuotas(montoSolicitado,cuotas)
                             })
-                        if (cantidadSimulaciones==2){
-                            break
+                            cantidadSimulaciones++
+                        if (cantidadSimulaciones==3){
+                            continue
                         } else{
                         let proximoPrestamo = confirm("¿Desea simular otro préstamo?")
                         if(proximoPrestamo==false) {
@@ -40,8 +40,8 @@ function simular ()
                         }
                     }
                 }
-            }
-            prestamos.length!=0 ? mostrarResultados(prestamos) : console.error("No hay préstamos simulados")
+            }while(cantidadSimulaciones<3)
+            prestamos.length!=0 ? mostrarResultados(prestamos) : console.error("No hay préstamos simulados.")
         }
     }
 
