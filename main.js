@@ -2,12 +2,12 @@
 
 function simular () 
     {
-    const nombre = prompt("Bienvenido a nuestro simulador de préstamos, ingrese su nombre para iniciar") ?? ""
+    const nombre = prompt("Bienvenido a nuestro simulador de préstamos, ingrese su nombre para iniciar.") ?? ""
     if(nombre == "") {
         alert("Debe ingresar un nombre válido.")
         console.error("No ingresó un nombre válido.")
     }else{ 
-        alert(`Bienvenido ${nombre}. Usted puede generar hasta 3 simulaciones de préstamo, nuestro interés actual es del 40%. En caso de querer simular menos y salir del programa, seleccione cancelar o ingrese cualquier carácter que no sea numérico.`)
+        alert(`Bienvenido ${nombre}. Usted puede generar hasta 3 simulaciones de préstamo, nuestro interés actual es del 40%. \nEn caso de querer simular menos y salir del programa, seleccione cancelar o ingrese cualquier caractér que no sea numérico.`)
         const prestamos = []
         let cantidadSimulaciones = 0
         do { 
